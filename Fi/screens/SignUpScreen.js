@@ -1,6 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, {Component} from 'react';
 import axios from 'axios';
+import ProgressCircle from 'react-native-progress-circle';
+
 import {
   Image,
   Platform,
@@ -50,7 +52,7 @@ class SignUpScreen extends Component{
         secureTextEntry={true}/>
         <View style={{marginTop:5}}>
         <Button title="submit" color="#1e5631"
-          onPress={() => axios.get('https://paypal-hackathon.herokuapp.com/authentication/signup', {firstname, lastname, email, password})
+          onPress={() => axios.get('https://paypal-hackathon.herokuapp.com/authentication/signup/', {firstname, lastname, email, password})
             .then(function (response) {
               // handle success
               console.log(response)

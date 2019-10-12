@@ -40,18 +40,24 @@ class LoginScreen extends Component{
         placeholder="password"
         onChange={(text) => {this.setState({password: text})}}
         secureTextEntry={true}/>
-        <Button title="submit"
-          color="#1e5631"
-          onPress={() => axios.get('https://paypal-hackathon.herokuapp.com/authentication/login', {email, password})
-            .then((id) => {
-              this.props.screenProps.handleId(id.data);
-              this.props.navigation.navigate("Main");
-            }).catch((err) =>{
-                console.log(err);
-            })}/>
-        <Button title="sign up"
-          color="#1e5631"
-          onPress={() => {this.props.navigation.navigate("Signup")}}/>
+        <View style = {{flex:1, flexDirection: "row"}}>
+          <View style = {{margin: 20}}>
+            <Button title="submit"
+              color="#1e5631"
+              onPress={() => axios.get('https://paypal-hackathon.herokuapp.com/authentication/login/', {email, password})
+                .then((id) => {
+                  this.props.screenProps.handleId(id.data);
+                  this.props.navigation.navigate("Main");
+                }).catch((err) =>{
+                    console.log(err);
+                })}/>
+          </View>
+          <View style = {{margin: 20}}>
+            <Button title="sign up"
+              color="#1e5631"
+              onPress={() => {this.props.navigation.navigate("Signup")}}/>
+          </View>
+        </View>
       </View>
       <View style={{flex:2}} />
     </View>
