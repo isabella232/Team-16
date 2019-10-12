@@ -23,7 +23,6 @@ class LoginScreen extends Component{
 
   render() {
     const {email, password} = this.state;
-
     return (
     <View style={{flex:1}}>
       <View style={{flex:3}} />
@@ -44,8 +43,11 @@ class LoginScreen extends Component{
         <Button title="submit"
           color="#1e5631"
           onPress={() => axios.get('https://paypal-hackathon.herokuapp.com/authentication/login', {email, password})
-            .then(function (id) {
-
+            .then((id) => {
+              this.props.screenProps.handleId(id.data);
+              this.props.navigation.navigate("Main");
+            }).catch((err) =>{
+                console.log(err);
             })}/>
         <Button title="sign up"
           color="#1e5631"
@@ -56,7 +58,6 @@ class LoginScreen extends Component{
   );
 }
 }
-
 LoginScreen.navigationOptions = {
   header: null,
 };

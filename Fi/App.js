@@ -1,18 +1,38 @@
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
+class App extends Component {
+  state = { 
+    id: null
+   }
+  handleId = (id) =>{
+    this.setState({id});
+  }
+  render() { 
+    const {id} = this.state;
+    return (<Loading id = {id} handleId = {this.handleId}>
 
+    </Loading>  );
+  }
+}
+ 
+export default App;
+
+
+
+Loading = (props) => {
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
+  
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
+        
         startAsync={loadResourcesAsync}
         onError={handleLoadingError}
         onFinish={() => handleFinishLoading(setLoadingComplete)}
@@ -22,7 +42,8 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+        
+        <AppNavigator {...props}/>
       </View>
     );
   }
